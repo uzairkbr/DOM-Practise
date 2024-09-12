@@ -169,11 +169,12 @@ main p {
 @media (max-width: 768px) {
   body {
     grid-template-columns: 1fr;
+    font-size: 14px;
   }
 
+  main,
   .container {
-    border: none;
-    padding: 0;
+    padding: 10px;
   }
 
   #sidebar {
@@ -182,10 +183,11 @@ main p {
     width: 100%;
     max-width: 100%;
     border-right: none;
-    border-top: 1px solid var(--color-line);
     position: fixed;
     top: unset;
     bottom: 0;
+    display: flex;
+    justify-content: center;
 
     > ul {
       padding: 0;
@@ -237,5 +239,10 @@ main p {
       }
     }
   }
+}
 
+@media (max-width: 500px) {
+  body {
+    font-size: 10px;
+  }
 }
