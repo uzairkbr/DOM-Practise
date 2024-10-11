@@ -9,6 +9,9 @@ function toggleSideBar() {
 }
 
 function toggleSubMenu(button) {
+  if(!button.nextElementSibling.classList.contains("show")){
+    closeAllSubMenus();
+  }
 
   button.nextElementSibling.classList.toggle('show');
   button.classList.toggle('rotate');
