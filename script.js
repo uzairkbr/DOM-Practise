@@ -5,16 +5,10 @@ function toggleSideBar() {
   sideBar.classList.toggle('close');
   toggleBtn.classList.toggle('rotate');
 
-  if(!button.nextElementSibling.classList.contains("show")) {
-    closeAllSubMenus();
-  }
+  closeAllSubMenus();
 }
 
 function toggleSubMenu(button) {
-
-  if(!button.nextElementSibling.classList.contains("show")) {
-    closeAllSubMenus();
-  }
 
   button.nextElementSibling.classList.toggle('show');
   button.classList.toggle('rotate');
