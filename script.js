@@ -90,9 +90,35 @@ function closeAllFaqs() {
   const formSubmitButton = document.getElementById("timer__button--close");
   const closeIcon = document.querySelector(".dialog__close");
   const dialog = document.querySelector('dialog'); 
+  const form = document.querySelector('.timer__form');
+
+  function disableScroll() {
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function enableScroll() {
+    document.body.style.overflow = '';
+  }
+
+  function clearInputs() {
+    const inputs = document.querySelectorAll('.timer__form input');
+    inputs.forEach(input => {
+      input.value = '';
+    });
+  }
+
+  function setupTimer(days = 0, hours = 0, minutes = 0, seconds = 0) {
+    document.querySelector('.timer__days #days').textContent = days;
+    document.querySelector('.timer__hours #hours').textContent = hours;
+    document.querySelector('.timer__minutes #minutes').textContent = minutes;
+    document.querySelector('.timer__seconds #seconds').textContent = seconds;
+  }
+
+  setupTimer(0, 0, 0, 0);
 
   timerOpen.addEventListener('click', () => {
     dialog.showModal();
+    disableScroll();
   });
 
   document.querySelector('form').addEventListener('submit', function(e) {
@@ -102,23 +128,36 @@ function closeAllFaqs() {
     e.preventDefault();
 
     if (minutesInput.value === '' || secondsInput.value === '') {
+      enableScroll();
       alert("Please enter values for both Minutes and Seconds.");
     } else {
       dialog.close();
       clearInputs();
+      enableScroll();
     }
   });
-  
 
   closeIcon.addEventListener("click", function() {
     dialog.close();
     clearInputs();
+    enableScroll();
   })
 
-  function clearInputs() {
-    const inputs = document.querySelectorAll('.timer__form input');
-    inputs.forEach(input => {
-      input.value = '';
-    });
-  }
+  form.addEventListener('submit', (e) => {
+    e.preventDefault(); 
+
+
+     const days = Math.round(parseInt(document.querySelector('.timer__form #days').value) || 0);
+     const hours = Math.round(parseInt(document.querySelector('.timer__form #hours').value) || 0);
+     const minutes = Math.round(parseFloat(document.querySelector('.timer__form #minutes').value) || 0);
+     const seconds = Math.round(parseFloat(document.querySelector('.timer__form #seconds').value) || 0);
+ 
+     console.log(days);
+     console.log(hours);
+     console.log(minutes);
+     console.log(seconds);
+
+    setupTimer(days, hours, minutes, seconds);
+    dialog.close();
+  });
 })();
