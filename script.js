@@ -145,17 +145,16 @@ function closeAllFaqs() {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault(); 
-
-
-     const days = Math.round(parseInt(document.querySelector('.timer__form #days').value) || 0);
-     const hours = Math.round(parseInt(document.querySelector('.timer__form #hours').value) || 0);
-     const minutes = Math.round(parseFloat(document.querySelector('.timer__form #minutes').value) || 0);
-     const seconds = Math.round(parseFloat(document.querySelector('.timer__form #seconds').value) || 0);
+    
+    const days = parseInt(document.querySelector('.timer__form #days').value) || 0;
+    const hours = parseInt(document.querySelector('.timer__form #hours').value) || 0;
+    const minutes = parseInt(document.querySelector('.timer__form #minutes').value) || 0;
+    const seconds = parseInt(document.querySelector('.timer__form #seconds').value) || 0;
  
-     console.log(days);
-     console.log(hours);
-     console.log(minutes);
-     console.log(seconds);
+    console.log(days);
+    console.log(hours);
+    console.log(minutes);
+    console.log(seconds);
 
     setupTimer(days, hours, minutes, seconds);
     dialog.close();
