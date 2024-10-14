@@ -1,5 +1,6 @@
+// Responsive Sidebar Menu
 {
-    const sideBar = document.getElementById('sidebar');
+  const sideBar = document.getElementById('sidebar');
   const toggleBtn = document.getElementById('toggle-btn');
 
   function toggleSideBar() {
@@ -36,7 +37,7 @@ toggleBtn.addEventListener("click", toggleSideBar);
 
 }
 
-
+// Faqs
 (function(){
   const faqs = document.querySelectorAll('.faq');
 
@@ -67,4 +68,57 @@ function closeAllFaqs() {
   });
 }
 
+})();
+
+// Scroll To Top 
+(function() {
+  const scrollBtn = document.getElementById('scroll-to-top');
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  scrollBtn.addEventListener('click', scrollToTop);
+})();
+
+// Timer
+(function() {
+  const timerOpen = document.getElementById('timer__button--open');
+  const formSubmitButton = document.getElementById("timer__button--close");
+  const closeIcon = document.querySelector(".dialog__close");
+  const dialog = document.querySelector('dialog'); 
+
+  timerOpen.addEventListener('click', () => {
+    dialog.showModal();
+  });
+
+  document.querySelector('form').addEventListener('submit', function(e) {
+    const minutesInput = document.getElementById('minutes');
+    const secondsInput = document.getElementById('seconds');
+  
+    e.preventDefault();
+
+    if (minutesInput.value === '' || secondsInput.value === '') {
+      alert("Please enter values for both Minutes and Seconds.");
+    } else {
+      dialog.close();
+      clearInputs();
+    }
+  });
+  
+
+  closeIcon.addEventListener("click", function() {
+    dialog.close();
+    clearInputs();
+  })
+
+  function clearInputs() {
+    const inputs = document.querySelectorAll('.timer__form input');
+    inputs.forEach(input => {
+      input.value = '';
+    });
+  }
 })();

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Home</title>
 </head>
 <body>
@@ -149,7 +150,81 @@
       </div>
     </div>
 
+    <div class="timer-wrapper">
+      <div class="timer__heading">
+        <h3>Timer</h3>
+
+        <button id="timer__button--open">Set Timer</button>
+        
+        <dialog>
+
+          <div class="dialog__container">
+
+           <span class="dialog__close"><i class="fa-solid fa-circle-xmark"></i></span> 
+            
+            <h3>Enter Value for Timer</h3>
+            
+            <form action="#" class="timer__form">
+              <label for="days">Days: </label>
+              <input type="number" id="days">
+            
+              <label for="hours">Hours: </label>
+              <input type="number" id="hours">
+            
+              <label for="minutes">Minutes: </label>
+              <input type="number" id="minutes" required>
+            
+              <label for="seconds">Seconds: </label>
+              <input type="number" id="seconds" required>
+            
+              <input type="submit" id="timer__button--close" value="Start Timer">
+            </form>
+            
+          </div>
+        </dialog>
+      </div>
+
+      <div class="timer">
+        <div class="timer__days">
+          <span id="days">00</span>
+          <span>Days</span>
+        </div>
+
+        <div class="timer__hours">
+          <span id="hours">00</span>
+          <span>Hours</span>
+        </div>
+
+        <div class="timer__minutes">
+          <span id="minutes">00</span>
+          <span>Minutes</span>
+        </div>
+
+        <div class="timer__seconds">
+          <span id="seconds">00</span>
+          <span>Seconds</span>
+        </div>
+      </div>
+    </div>  
+
+    <div class="container">
+      <h3>Home Page</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, iste? Ipsum porro commodi, nihil eum vel suscipit cupiditate incidunt tenetur aperiam sed alias facere deleniti, recusandae quasi aliquam esse maxime harum dolore. Numquam, aut, suscipit sit natus asperiores repellendus minima laboriosam officiis nulla quas iste iusto at nesciunt soluta inventore.</p>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut at debitis explicabo rerum sapiente modi non odit perferendis minima quos nemo unde eius sint aliquid doloribus accusantium doloremque architecto laborum, minus delectus laboriosam? Minus aut veritatis neque dolore id possimus consequatur iste, mollitia nemo, quam tenetur magni, omnis unde obcaecati quaerat vel aperiam voluptas animi ipsum alias? Voluptate fugiat molestiae sit illo, aperiam, beatae nam quisquam tempore quod reprehenderit animi voluptas maiores culpa vitae pariatur soluta deleniti? Quaerat ex officiis quisquam ad esse nobis eligendi quos, suscipit voluptatibus voluptatem nesciunt debitis asperiores distinctio, omnis enim neque obcaecati! Expedita, magni minus.</p>
+    </div>
+
+    <div class="container">
+      <h3>Home Page</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, iste? Ipsum porro commodi, nihil eum vel suscipit cupiditate incidunt tenetur aperiam sed alias facere deleniti, recusandae quasi aliquam esse maxime harum dolore. Numquam, aut, suscipit sit natus asperiores repellendus minima laboriosam officiis nulla quas iste iusto at nesciunt soluta inventore.</p>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut at debitis explicabo rerum sapiente modi non odit perferendis minima quos nemo unde eius sint aliquid doloribus accusantium doloremque architecto laborum, minus delectus laboriosam? Minus aut veritatis neque dolore id possimus consequatur iste, mollitia nemo, quam tenetur magni, omnis unde obcaecati quaerat vel aperiam voluptas animi ipsum alias? Voluptate fugiat molestiae sit illo, aperiam, beatae nam quisquam tempore quod reprehenderit animi voluptas maiores culpa vitae pariatur soluta deleniti? Quaerat ex officiis quisquam ad esse nobis eligendi quos, suscipit voluptatibus voluptatem nesciunt debitis asperiores distinctio, omnis enim neque obcaecati! Expedita, magni minus.</p>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut at debitis explicabo rerum sapiente modi non odit perferendis minima quos nemo unde eius sint aliquid doloribus accusantium doloremque architecto laborum, minus delectus laboriosam? Minus aut veritatis neque dolore id possimus consequatur iste, mollitia nemo, quam tenetur magni, omnis unde obcaecati quaerat vel aperiam voluptas animi ipsum alias? Voluptate fugiat molestiae sit illo, aperiam, beatae nam quisquam tempore quod reprehenderit animi voluptas maiores culpa vitae pariatur soluta deleniti? Quaerat ex officiis quisquam ad esse nobis eligendi quos, suscipit voluptatibus voluptatem nesciunt debitis asperiores distinctio, omnis enim neque obcaecati! Expedita, magni minus.</p>
+    </div>
+
   </main>
+
+  <button id="scroll-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
 
 
   <script src="script.js"></script>
