@@ -41,21 +41,21 @@ toggleBtn.addEventListener("click", toggleSideBar);
 (function(){
   const faqs = document.querySelectorAll('.faq');
 
-faqs.forEach(faq => {
-  faq.addEventListener('click', () => {
-    const answer = faq.querySelector('.answer');
-    const icon = faq.querySelector('.icon');
-    
-    const isActive = answer.classList.contains('active');
+  faqs.forEach(faq => {
+    faq.addEventListener('click', () => {
+      const answer = faq.querySelector('.answer');
+      const icon = faq.querySelector('.icon');
+      
+      const isActive = answer.classList.contains('active');
 
-    closeAllFaqs();
+      closeAllFaqs();
 
-    if (!isActive) {
-      answer.style.maxHeight = answer.scrollHeight + 10 + 'px';
-      icon.style.transform = 'rotate(45deg)';
-      answer.classList.add("active");
-    }
-  });
+      if (!isActive) {
+        answer.style.maxHeight = answer.scrollHeight + 10 + 'px';
+        icon.style.transform = 'rotate(45deg)';
+        answer.classList.add("active");
+      }
+    });
 });
 
 function closeAllFaqs() {
@@ -114,19 +114,19 @@ function closeAllFaqs() {
     document.querySelector('.timer__seconds #seconds').textContent = seconds;
   }
 
-  setupTimer(0, 0, 0, 0);
+  setupTimer();
 
   timerOpen.addEventListener('click', () => {
     dialog.showModal();
     disableScroll();
   });
 
-  document.querySelector('form').addEventListener('submit', function(e) {
-    const minutesInput = document.getElementById('minutes');
-    const secondsInput = document.getElementById('seconds');
-  
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
 
+    const minutesInput = document.querySelector('.timer__form #minutes');
+    const secondsInput = document.querySelector('.timer__form #seconds');
+  
     if (minutesInput.value === '' || secondsInput.value === '') {
       enableScroll();
       alert("Please enter values for both Minutes and Seconds.");
@@ -137,12 +137,6 @@ function closeAllFaqs() {
     }
   });
 
-  closeIcon.addEventListener("click", function() {
-    dialog.close();
-    clearInputs();
-    enableScroll();
-  })
-
   form.addEventListener('submit', (e) => {
     e.preventDefault(); 
     
@@ -150,13 +144,22 @@ function closeAllFaqs() {
     const hours = parseInt(document.querySelector('.timer__form #hours').value) || 0;
     const minutes = parseInt(document.querySelector('.timer__form #minutes').value) || 0;
     const seconds = parseInt(document.querySelector('.timer__form #seconds').value) || 0;
- 
+
+    setupTimer(days, hours, minutes, seconds);
+
     console.log(days);
+    console.log(typeof days);
     console.log(hours);
     console.log(minutes);
     console.log(seconds);
 
-    setupTimer(days, hours, minutes, seconds);
     dialog.close();
+    clearInputs();
+  });
+
+  closeIcon.addEventListener("click", function() {
+    dialog.close();
+    clearInputs();
+    enableScroll();
   });
 })();

@@ -350,6 +350,11 @@ main p {
     align-items: center;
     gap: 100px;
 
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 60px;
+    }
+
     div {
       display: flex;
       flex-direction: column;
