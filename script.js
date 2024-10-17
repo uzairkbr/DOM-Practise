@@ -85,17 +85,30 @@ function closeAllFaqs() {
 })();
 
 // Timer
+
+
 (function() {
-  const timerOpen = document.getElementById('timer__button--open');
-  const formSubmitButton = document.getElementById("timer__button--close");
-  const closeIcon = document.querySelector(".dialog__close");
+  const showDialog = document.getElementById('timer__button--open');
+  const closeDialog = document.querySelector(".dialog__close");
   const dialog = document.querySelector('dialog'); 
   const form = document.querySelector('.timer__form');
+
+  const daysInput = document.querySelector(".timer__form #days");
+  const hoursInput = document.querySelector(".timer__form #hours");
+  const minutesInput = document.querySelector(".timer__form #minutes");
+  const secondsInput = document.querySelector(".timer__form #seconds");
+
+  const daysOutput = document.querySelector('.timer__days #days');
+  const hoursOutput = document.querySelector('.timer__hours #hours');
+  const minutesOutput = document.querySelector('.timer__minutes #minutes');
+  const secondsOutput = document.querySelector('.timer__seconds #seconds');
+
+  let countdownInterval;
 
   function disableScroll() {
     document.body.style.overflow = 'hidden';
   }
-  
+
   function enableScroll() {
     document.body.style.overflow = '';
   }
@@ -107,59 +120,77 @@ function closeAllFaqs() {
     });
   }
 
-  function setupTimer(days = 0, hours = 0, minutes = 0, seconds = 0) {
-    document.querySelector('.timer__days #days').textContent = days;
-    document.querySelector('.timer__hours #hours').textContent = hours;
-    document.querySelector('.timer__minutes #minutes').textContent = minutes;
-    document.querySelector('.timer__seconds #seconds').textContent = seconds;
+  function renderTime(days = 0, hours = 0, minutes = 0, seconds = 0) {
+    daysOutput.textContent = days;
+    hoursOutput.textContent = hours;
+    minutesOutput.textContent = minutes;
+    secondsOutput.textContent = seconds;
   }
 
-  setupTimer();
+  function startCountdown(days, hours, minutes, seconds) {
+    countdownInterval = setInterval(() => {
+      if (seconds > 0) {
+        seconds--;
+      } else if (minutes > 0) {
+        minutes--;
+        seconds = 59;
+      } else if (hours > 0) {
+        hours--;
+        minutes = 59;
+        seconds = 59;
+      } else if (days > 0) {
+        days--;
+        hours = 23;
+        minutes = 59;
+        seconds = 59;
+      } else {
+        clearInterval(countdownInterval);
+      }
 
-  timerOpen.addEventListener('click', () => {
+      renderTime(days, hours, minutes, seconds);
+    }, 1000);
+  }
+
+  showDialog.addEventListener("click", () => {
     dialog.showModal();
     disableScroll();
   });
 
-  form.addEventListener('submit', function(e) {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const minutesInput = document.querySelector('.timer__form #minutes');
-    const secondsInput = document.querySelector('.timer__form #seconds');
-  
-    if (minutesInput.value === '' || secondsInput.value === '') {
-      enableScroll();
-      alert("Please enter values for both Minutes and Seconds.");
-    } else {
-      dialog.close();
-      clearInputs();
-      enableScroll();
+    let days = +daysInput.value;
+    let hours = +hoursInput.value;
+    let minutes = +minutesInput.value;
+    let seconds = +secondsInput.value;
+
+    if (hours > 23) {
+      hours = hours / 24;
+      minutes += hours % 24 * 60;
     }
-  });
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault(); 
-    
-    const days = parseInt(document.querySelector('.timer__form #days').value) || 0;
-    const hours = parseInt(document.querySelector('.timer__form #hours').value) || 0;
-    const minutes = parseInt(document.querySelector('.timer__form #minutes').value) || 0;
-    const seconds = parseInt(document.querySelector('.timer__form #seconds').value) || 0;
+    if (minutes > 59) {
+      minutes = minutes / 59;
+      seconds += minutes % 59 * 60;
+    } 
 
-    setupTimer(days, hours, minutes, seconds);
+    if (seconds > 59) {
+      seconds = 59;
+    }
 
-    console.log(days);
-    console.log(typeof days);
-    console.log(hours);
-    console.log(minutes);
-    console.log(seconds);
+    renderTime(days, hours, minutes, seconds);
+    startCountdown(days, hours, minutes, seconds);
 
-    dialog.close();
-    clearInputs();
-  });
-
-  closeIcon.addEventListener("click", function() {
     dialog.close();
     clearInputs();
     enableScroll();
   });
+
+  closeDialog.addEventListener("click", function() {
+    dialog.close();
+    clearInputs();
+    enableScroll();
+  });
+
+  renderTime();
 })();
