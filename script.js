@@ -144,6 +144,7 @@ function closeAllFaqs() {
         minutes = 59;
         seconds = 59;
       } else {
+        
         clearInterval(countdownInterval);
       }
 
@@ -163,20 +164,6 @@ function closeAllFaqs() {
     let hours = +hoursInput.value;
     let minutes = +minutesInput.value;
     let seconds = +secondsInput.value;
-
-    if (hours > 23) {
-      hours = hours / 24;
-      minutes += hours % 24 * 60;
-    }
-
-    if (minutes > 59) {
-      minutes = minutes / 59;
-      seconds += minutes % 59 * 60;
-    } 
-
-    if (seconds > 59) {
-      seconds = 59;
-    }
 
     renderTime(days, hours, minutes, seconds);
     startCountdown(days, hours, minutes, seconds);
