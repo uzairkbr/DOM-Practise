@@ -487,3 +487,51 @@ form input[type="number"]::-webkit-inner-spin-button {
     font-size: 20px;
   }
 }
+
+
+/* Tab Navigation */
+.tab-navigation {
+
+  /* position: relative; */
+
+  .tab-btn {
+    padding: 10px 20px;
+    border: 1px solid var(--color-text);
+    border-radius: 5px;
+    color: var(--color-text);
+    transition: 0.3s;
+
+    &:hover {
+      background-color: var(--color-text);
+      color: var(--color-base);
+    }
+
+    &.active {
+      background-color: var(--color-text);
+      color: var(--color-base);
+    }
+  }
+}
+
+.tab-navigation__content {
+  opacity: 0;
+  visibility: hidden;
+  padding: 0;
+  margin-top: 0;
+  height: 0;
+  border: 1px solid var(--color-line);
+  border-radius: 15px;
+  transition: opacity 0.5s, margin-top 0.5s, padding 0.3s;
+
+  p {
+    color: var(--color-text-secondary);
+  }
+  
+  &.active {
+    height: auto;
+    margin-top: 20px;
+    padding: 10px 20px;
+    opacity: 1;
+    visibility: visible;
+  }
+}

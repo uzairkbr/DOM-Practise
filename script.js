@@ -85,8 +85,6 @@ function closeAllFaqs() {
 })();
 
 // Timer
-
-
 (function() {
   const showDialog = document.getElementById('timer__button--open');
   const closeDialog = document.querySelector(".dialog__close");
@@ -185,4 +183,21 @@ function closeAllFaqs() {
   });
 
   renderTime();
+})();
+
+// Tab Navigation
+(function() {
+  function openTab(e, tab) {
+    const tabContents = document.querySelectorAll('.tab-navigation__content');
+    const tabLinks = document.querySelectorAll('.tab-btn');
+
+    tabContents.forEach(content => content.classList.remove('active'));  // Remove active class from all content
+    tabLinks.forEach(link => link.classList.remove('active')); // Remove active class from all buttons
+
+    document.getElementById(tab).classList.add('active');  // Add active class to the selected content
+    e.currentTarget.classList.add('active');  // Add active class to the clicked button
+  }
+
+  // Expose the function globally by attaching it to the window object
+  window.openTab = openTab;
 })();
