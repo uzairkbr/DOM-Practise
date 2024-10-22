@@ -128,6 +128,11 @@ function closeAllFaqs() {
   }
 
   function startCountdown(days, hours, minutes, seconds) {
+    const audio = new Audio();
+    audio.src = "./audio/sound.mp3";
+    audio.loop = true;
+    audio.play();
+    
     countdownInterval = setInterval(() => {
       if (seconds > 0) {
         seconds--;
@@ -144,7 +149,7 @@ function closeAllFaqs() {
         minutes = 59;
         seconds = 59;
       } else {
-        
+        audio.pause();
         clearInterval(countdownInterval);
       }
 
