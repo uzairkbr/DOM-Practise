@@ -381,6 +381,11 @@ main p {
   }
 }
 
+.fa-volume-up:before,
+.fa-volume-mute:before {
+  content: "\f028";
+}
+
 dialog {
   background-color: var(--color-text);
   padding: 50px;

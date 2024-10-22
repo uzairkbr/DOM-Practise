@@ -90,6 +90,8 @@ function closeAllFaqs() {
   const closeDialog = document.querySelector(".dialog__close");
   const dialog = document.querySelector('dialog'); 
   const form = document.querySelector('.timer__form');
+  const soundToggleButton = document.getElementById('timer__button--toggle');
+  const soundButtonIcon = soundToggleButton.querySelector('#timer__button--toggle i');
 
   const daysInput = document.querySelector(".timer__form #days");
   const hoursInput = document.querySelector(".timer__form #hours");
@@ -102,6 +104,10 @@ function closeAllFaqs() {
   const secondsOutput = document.querySelector('.timer__seconds #seconds');
 
   let countdownInterval;
+  const audio = new Audio();
+  audio.src = "./audio/sound.mp3";
+  audio.loop = true;
+  let soundEnabled = true;
 
   function disableScroll() {
     document.body.style.overflow = 'hidden';
@@ -125,13 +131,23 @@ function closeAllFaqs() {
     secondsOutput.textContent = seconds;
   }
 
+  function playSound() {
+    if (soundEnabled) {
+      if (countdownInterval) {
+        audio.play();
+      }
+      soundButtonIcon.classList.add('fa-volume-up');
+      soundButtonIcon.classList.remove('fa-volume-mute');
+    } else {
+      audio.pause();
+      soundButtonIcon.classList.remove('fa-volume-up');
+      soundButtonIcon.classList.add('fa-volume-mute');
+    }
+  }
+
   function startCountdown(days, hours, minutes, seconds) {
-    const audio = new Audio();
-    audio.src = "./audio/sound.mp3";
-    audio.loop = true;
-    audio.play();
-    
     countdownInterval = setInterval(() => {
+      playSound();
       if (seconds > 0) {
         seconds--;
       } else if (minutes > 0) {
@@ -176,6 +192,11 @@ function closeAllFaqs() {
     enableScroll();
   });
 
+  soundToggleButton.addEventListener("click", () => {
+    soundEnabled = !soundEnabled;
+    playSound();
+  });
+
   closeDialog.addEventListener("click", function() {
     dialog.close();
     clearInputs();
@@ -191,13 +212,12 @@ function closeAllFaqs() {
     const tabContents = document.querySelectorAll('.tab-navigation__content');
     const tabLinks = document.querySelectorAll('.tab-btn');
 
-    tabContents.forEach(content => content.classList.remove('active'));  // Remove active class from all content
-    tabLinks.forEach(link => link.classList.remove('active')); // Remove active class from all buttons
+    tabContents.forEach(content => content.classList.remove('active')); 
+    tabLinks.forEach(link => link.classList.remove('active'));
 
-    document.getElementById(tab).classList.add('active');  // Add active class to the selected content
-    e.currentTarget.classList.add('active');  // Add active class to the clicked button
+    document.getElementById(tab).classList.add('active');
+    e.currentTarget.classList.add('active'); 
   }
 
-  // Expose the function globally by attaching it to the window object
   window.openTab = openTab;
 })();
