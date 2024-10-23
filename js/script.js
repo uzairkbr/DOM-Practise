@@ -109,6 +109,9 @@ function closeAllFaqs() {
   audio.loop = true;
   let soundEnabled = true;
 
+  const confettiAudio = new Audio();
+  confettiAudio.src = "./audio/confetti-sound.mp3";
+
   function disableScroll() {
     document.body.style.overflow = 'hidden';
   }
@@ -163,8 +166,14 @@ function closeAllFaqs() {
         minutes = 59;
         seconds = 59;
       } else {
+        confettiAudio.play();
         audio.pause();
+        confetti.start();
         clearInterval(countdownInterval);
+
+        setTimeout(() => {
+          confetti.stop();
+        }, 5000);
       }
 
       renderTime(days, hours, minutes, seconds);
@@ -215,9 +224,79 @@ function closeAllFaqs() {
     tabContents.forEach(content => content.classList.remove('active')); 
     tabLinks.forEach(link => link.classList.remove('active'));
 
-    document.getElementById(tab).classList.add('active');
+    const activeTab = document.getElementById(tab);
+
+    activeTab.classList.add('active');
     e.currentTarget.classList.add('active'); 
   }
 
   window.openTab = openTab;
 })();
+
+// Form Validation
+(function() {
+  const form = document.getElementById('registration-form');
+  const name = document.querySelector('.input-group #name');
+  const password = document.querySelector('.input-group #password');
+  const confirmPassword = document.querySelector('.input-group #confirm-password');
+  const nameError = document.getElementById('error-name');
+  const passError = document.getElementById('error-pass');
+  const confirmPassError = document.getElementById('error-confirm-pass');
+  
+  function validateInputs() { 
+    resetStates();
+    let isFormValid = true;
+
+    if (name.value.trim() === "") {
+      nameError.textContent = "Name is required";
+      nameError.classList.add('active');
+      isFormValid = false;
+    } else {
+      nameError.textContent = "";
+      nameError.classList.remove('active');
+      // isFormValid = true;
+    }
+
+    if (password.value.length < 8) {
+      passError.textContent= "Password must be at least 8 characters long";
+      passError.classList.add('active');
+      isFormValid = false;
+    } else {
+      passError.textContent = "";
+      passError.classList.remove('active');
+      // isFormValid = true;
+    }
+
+    if (password.value !== confirmPassword.value) {
+      confirmPassError.textContent = "Passwords do not match";
+      confirmPassError.classList.add('active');
+      isFormValid = false;
+    } else {
+      confirmPassError.textContent = "";
+      confirmPassError.classList.remove('active');
+      // isFormValid = true;
+    }
+
+    if (isFormValid) {
+      form.reset();
+      resetStates();
+      alert("Form submitted successfully");
+    }
+  }
+
+  function resetStates() {
+    const errors = document.querySelectorAll('.error-message');
+    errors.forEach(error => {
+      error.textContent = "";
+      error.classList.remove('active');
+    });
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    validateInputs();
+  });
+})();
+
+
+confetti.start();
